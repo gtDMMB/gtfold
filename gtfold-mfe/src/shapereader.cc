@@ -55,7 +55,8 @@ void readSHAPEarray(const char* filename, int seqlength){
 	int position;
 	double  SHAPEnumber;
 	
-	while(getline(infile,line)>0){
+     getline(infile, line);
+	while(line.length() > 0){
 		if(sscanf(line.c_str(), "%d %lf", &position, &SHAPEnumber)==2){
 			if(position <= seqlength){
 				SHAPEarray[position] = SHAPEnumber;
@@ -67,6 +68,7 @@ void readSHAPEarray(const char* filename, int seqlength){
 		}else{
 			printf("Invalid line (ignoring): %s\n", line.c_str());
 		}
+          getline(infile, line);
 	}
 
 }

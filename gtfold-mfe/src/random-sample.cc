@@ -25,7 +25,7 @@ using namespace std;
 		return exp(-Ed3(h,l,l+1)/RT);
 }*/
 
-double randdouble(){
+double randdouble_random_sample(){
 	    return rand()/(double(RAND_MAX)+1);
 } 
 
@@ -186,7 +186,7 @@ double rest_multi_prob_h_pairs_with_l
 
 //P_{Bh2l2}
 int there_is_another_helix(int h2, int l2, int j, dangle_struct d_struct){
-	double counter = randdouble();
+	double counter = randdouble_random_sample();
 	double coin_flip = cond_dangle(j,h2,l2) * exp(-(j - 1 - l2) * Eb / RT) /
 					  (cond_dangle(j,h2,l2) * exp(-(j - 1 - l2) * Eb / RT) + 
 					exp(Ed3(h2,l2,l2 + 1)/RT) * d_struct.u1[l2 + 2][j - 1] +
@@ -214,7 +214,7 @@ void single_stranded(int i, int j, int * structure){
 
 void unknown_strand(int i, int j, dangle_struct d_struct, int * structure, list<sub_seq> * stack){
 //Unknown strand from i,j
-	double counter = randdouble();
+	double counter = randdouble_random_sample();
 	counter -= single_stranded_prob(i, j, d_struct);
 	if (counter <= 0){
 		single_stranded(i,j, structure);
@@ -283,7 +283,7 @@ void unknown_strand(int i, int j, dangle_struct d_struct, int * structure, list<
 	}
 
 	//Now to find l
-	counter = randdouble(); //reset counter, this is a seperate case
+	counter = randdouble_random_sample(); //reset counter, this is a seperate case
 	for(int l = h + MIN_TURN; l <= j - MIN_TURN; l++){
 		counter -= prob_h_pairs_with_l(h,l,j,d_struct);	
 		if (counter < 0){
@@ -314,7 +314,7 @@ void unknown_strand(int i, int j, dangle_struct d_struct, int * structure, list<
 }
 
 void paired_strand(int i, int j, dangle_struct d_struct, int * structure, list<sub_seq> * stack){
-	double counter = randdouble();
+	double counter = randdouble_random_sample();
 	double cumulative_prob = 0;
 
  
@@ -349,7 +349,7 @@ void paired_strand(int i, int j, dangle_struct d_struct, int * structure, list<s
 	//The probabilities should work out so that
 	//we never get more than 30 base internal loops.
 	//Might need to put guards in here.
-	counter = randdouble();
+	counter = randdouble_random_sample();
 	for(int h = i + 1; h < j; h++){
 		for(int l = h + MIN_TURN; l < j; l++){
 			if(!(h == i + 1 && l == j - 1)) //Don't want a stack
@@ -375,7 +375,7 @@ void paired_strand(int i, int j, dangle_struct d_struct, int * structure, list<s
 
 //It returns where it stops.
 int multi_first_loop(int i, int j, dangle_struct d_struct, int * structure, list<sub_seq> * stack){
-	double counter = randdouble();
+	double counter = randdouble_random_sample();
 	for(int l= i + MIN_TURN + 1; l < j - 1; l++){
 		counter -= first_multi_prob_pair_next_base(i,l,j,d_struct);
 		if(counter < 0){
@@ -422,7 +422,7 @@ int multi_first_loop(int i, int j, dangle_struct d_struct, int * structure, list
 	
 	//Now h is the opening base in a base pair now we need to find the closing one
 	//So first we start a new counter
-	counter = randdouble();
+	counter = randdouble_random_sample();
 	for (int l = h + MIN_TURN; l < j - 1; l++){
 		counter -= first_multi_prob_base_rest(i,h,l,j,d_struct);
 		if(counter < 0){
@@ -450,7 +450,7 @@ void multi_loop_strand(int i, int j, dangle_struct d_struct, int * structure, li
 	int breakflag = 0;
 	
 	while(notdone){
-		double counter = randdouble();
+		double counter = randdouble_random_sample();
 		for(int l = l1 + MIN_TURN + 1; l < j - 1; l++){
 			counter -= rest_multi_prob_next_base_pairs(l1,l,j,d_struct);
 			if(counter < 0){
@@ -512,7 +512,7 @@ void multi_loop_strand(int i, int j, dangle_struct d_struct, int * structure, li
 		
 		//Now h is the opening base in a base pair now we need to find the closing one
 		//So first we start a new counter
-		counter = randdouble();
+		counter = randdouble_random_sample();
 		for (int l = h + MIN_TURN; l < j - 1; l++){
 			counter -= rest_multi_prob_h_pairs_with_l(l1,h,l,j,d_struct);
 			if(counter < 0){

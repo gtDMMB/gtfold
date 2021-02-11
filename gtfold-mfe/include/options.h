@@ -12,6 +12,9 @@ using namespace std;
 //extern bool NOISOLATE;
 //extern bool USERDATA;
 //extern bool PARAMS;
+
+extern bool VERBOSE;
+
 /*
 extern bool LIMIT_DISTANCE;
 extern bool BPP_ENABLED;

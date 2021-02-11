@@ -130,7 +130,7 @@ void process(ss_map_t& subopt_data, int len, string suboptFile, int is_check_for
                         count++;
 			if(is_check_for_duplicates_enabled==1){
 				pair<ss_map_t::iterator, bool> ins_result;
-				ins_result = subopt_data.insert(std::make_pair<std::string,int>(ps.str,ps.ae_));
+				ins_result = subopt_data.insert(std::make_pair(ps.str,ps.ae_));
 				if (ins_result.second == false) {
 					printf("Duplicate Structure!!!");
 					exit(1);

@@ -40,7 +40,10 @@
 #define xstr(s) str(s)
 #define str(s) #s
 
-using namespace std;
+//using namespace std;
+using std::iostream;
+using std::fstream;
+using std::istream;
 
 std::string EN_DATADIR;
 

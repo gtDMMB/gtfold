@@ -5,7 +5,15 @@
 
 #ifdef __cplusplus
 #include <string>
-using namespace std;
+#include <iostream>
+//using namespace std;
+using std::string;
+using std::ifstream;
+using std::ofstream;
+using std::cout;
+using std::endl;
+using std::ios;
+using std::cerr;
 #endif
 
 extern unsigned char *RNA; 

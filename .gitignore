@@ -17,3 +17,11 @@ Makefile.in
 *.lai
 *.la
 *.a
+
+# CMake generated build files
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+CMakeFiles/*
+cmake-build/*
+bin/*

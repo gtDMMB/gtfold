@@ -17,7 +17,7 @@ std::stack<base_pair> g_stack;
 
 double energy = 0;
 
-double randdouble()
+double randdouble_stochastic()
 {
   return rand()/(double(RAND_MAX)+1);
 }
@@ -200,7 +200,7 @@ double U1_j_hl_case3(int h, int l, int j)
 
 void rnd_u(int i, int j, int* structure)
 {
-  double rnd = randdouble();
+  double rnd = randdouble_stochastic();
   double cum_prob = 0.0;
  
 
@@ -257,7 +257,7 @@ void rnd_u(int i, int j, int* structure)
 
   assert (h1 != -1) ;
 
-  rnd = randdouble();
+  rnd = randdouble_stochastic();
   cum_prob = 0;
   for (int l = h1+1; l < j; ++l)
   {
@@ -308,7 +308,7 @@ void rnd_u(int i, int j, int* structure)
 
 void rnd_ud(int i, int j, int* structure)
 {
-  double rnd = randdouble();
+  double rnd = randdouble_stochastic();
   double cum_prob = 0.0;
   for (int l = i+1; l < j ; ++l)
   {
@@ -356,7 +356,7 @@ void rnd_ud(int i, int j, int* structure)
 
 void rnd_up(int i, int j, int* structure)
 {
-  double rnd = randdouble();
+  double rnd = randdouble_stochastic();
   double cum_prob = 0;
   assert(structure[i] == 0);
   assert(structure[j] == 0);
@@ -412,7 +412,7 @@ void rnd_up(int i, int j, int* structure)
 
 void rnd_u1(int i, int j, int* structure)
 {
-  double rnd = randdouble();
+  double rnd = randdouble_stochastic();
   double cum_prob = 0;
   
   cum_prob += U1_ij(i,j);
@@ -439,7 +439,7 @@ void rnd_u1(int i, int j, int* structure)
  
   assert(h1 != -1);
   // sample l given h1 
-  rnd = randdouble();
+  rnd = randdouble_stochastic();
   cum_prob = 0;
   for (int l = h1+1; l <= j ; ++l)
   {
@@ -487,7 +487,7 @@ void rnd_u1(int i, int j, int* structure)
 
 void rnd_u1d(int i, int j, int* structure)
 {
-  double rnd = randdouble();
+  double rnd = randdouble_stochastic();
   double cum_prob = 0;
   
   for (int l = i+1; l <= j; ++l)
@@ -536,7 +536,7 @@ void rnd_u1d(int i, int j, int* structure)
 
 void rnd_upm(int i, int j, int* structure)
 {
-  double rnd = randdouble();
+  double rnd = randdouble_stochastic();
   double cum_prob = 0;
   if (ss_verbose == 1)
     printf("Multiloop (%d %d)\n",i,j);
@@ -615,7 +615,7 @@ void rnd_upm(int i, int j, int* structure)
   }
   assert(h1!=-1);
   
-  rnd = randdouble();
+  rnd = randdouble_stochastic();
   cum_prob = 0;
   for (int l = h1+1; l < j; ++l)
   {

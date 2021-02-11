@@ -56,7 +56,7 @@ static int load_constraints(const char* constr_file, int seq_length, int verbose
 
 	std::ifstream cfcons;
 	cfcons.open(constr_file, std::ios::in);
-    if (cfcons == 0) {
+    if (cfcons.fail()) {
         fprintf(stderr, "Error opening constraint file\n\n");
         cfcons.close();
         return -1;

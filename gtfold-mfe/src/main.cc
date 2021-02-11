@@ -35,7 +35,7 @@
 #include "subopt_main.h"
 #include "utils.h"
 #include "global.h"
-
+#include "energy.h"
 
 int main(int argc, char** argv) {
   print_header();
