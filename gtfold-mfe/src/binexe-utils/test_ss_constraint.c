@@ -7,10 +7,14 @@ Email: manoj6891@gmail.com
 #include<string.h>
 #include<time.h>
 //#include<fstream.h>
+#include <unistd.h>
+#include <stdbool.h>
+
 int LENGTH = 10;//default value
 int CHANCE = 50;
 char* seqFileName;
-int VERBOSE=0;
+bool VVERBOSE = true;
+
 #define MAX_CONSTRS 750
 
 void executeCommand(char* cmd){
@@ -19,7 +23,7 @@ void executeCommand(char* cmd){
 	printf("return value: %d\n", returnVal);
 	if(returnVal != 0){
 		printf("Error: returnVal:%d, Exiting...\n", returnVal);
-		exit(-1);
+		exit(-3);
 	}
 }
 
@@ -78,7 +82,7 @@ void parseCtFileToFindForcedConstraintRegion(char* ctFileName, char* constrs[MAX
 				char* ss_constr = (char*)malloc(30);//new char[30];
 				sprintf(ss_constr, "%s%d%s%d", "P ", start, " 0 ", (end-start+1));
 				constrs[index++] = ss_constr;
-				if(VERBOSE==1)printf("constraint is: %s\n",ss_constr);
+				if(VVERBOSE==1)printf("constraint is: %s\n",ss_constr);
 				if(index>=MAX_CONSTRS) break;
 				start=-1;
 			}   
@@ -89,7 +93,7 @@ void parseCtFileToFindForcedConstraintRegion(char* ctFileName, char* constrs[MAX
 			char* ss_constr = malloc(30);//new char[30];
 			sprintf(ss_constr, "%s%d%s%d", "P ", start, " 0 ", (end-start+1));
 			constrs[index++] = ss_constr;
-			if(VERBOSE==1)printf("constraint is: %s\n",ss_constr);
+			if(VVERBOSE==1)printf("constraint is: %s\n",ss_constr);
 			if(index>=MAX_CONSTRS) break;
 			start=-1;
 
@@ -101,7 +105,7 @@ void parseCtFileToFindForcedConstraintRegion(char* ctFileName, char* constrs[MAX
 	char* ss_constr = malloc(30);//new char[30];
 	if(start!=-1){
 		sprintf(ss_constr, "%s%d%s%d", "P ", start, " 0 ", (end-start+1));
-		if(VERBOSE==1)printf("constraint is: %s\n",ss_constr);
+		if(VVERBOSE==1)printf("constraint is: %s\n",ss_constr);
 		constrs[index++] = ss_constr;
 	}
 	if(index<MAX_CONSTRS) constrs[index] = NULL;
@@ -110,8 +114,10 @@ void parseCtFileToFindForcedConstraintRegion(char* ctFileName, char* constrs[MAX
 	return ;//ss_constr;
 }
 
+static const char *CONSTRAINTS_FILE_NAME = "constraints.txt";
+
 char* createConstraintFile(char* constrs[MAX_CONSTRS]){
-	char* constrFileName = "constraints.txt";
+	const char* constrFileName = CONSTRAINTS_FILE_NAME;
 	FILE* constrFile = fopen(constrFileName, "w+");
 	int i;
 
@@ -119,7 +125,7 @@ char* createConstraintFile(char* constrs[MAX_CONSTRS]){
 		if(constrs[i]==NULL)break;
 		int chance = rand()%100;
 		if(chance>CHANCE) continue;	
-		if(VERBOSE==1)printf("writing constraint: %s\n", constrs[i]);
+		if(VVERBOSE==1)printf("writing constraint: %s\n", constrs[i]);
 		fprintf(constrFile, "%s\n", constrs[i]);
 		//rewind(constrFile);
 	}
@@ -139,7 +145,7 @@ void help(){
 	printf("   --ssmaxlen INT	Restricts maximum length for any single stranded constraint region (default=10).\n");
 	printf("   -h, --help	Output help (this message) and exit.\n");
 	printf("\n");
-	exit(-1);
+	exit(-2);
 }
 
 void parse_options(int argc, char* argv[]){
@@ -159,7 +165,7 @@ void parse_options(int argc, char* argv[]){
 				else
 					help();
 			} else if (strcmp(argv[i], "--verbose") == 0 || strcmp(argv[i], "-v") == 0) {
-				VERBOSE = 1;
+				VVERBOSE = 1;
 			}	
 		}
 		else {
@@ -180,7 +186,8 @@ int main(int argc, char* argv[]){
 	char cmd[200];
 	printf("seqFileName: %s\n", seqFileName);
 	printf("running the program gtmfe on this seq without constraints\n");
-	strcat(cmd, "./gtmfe ");strcat(cmd, seqFileName);
+	strcat(cmd, "./bin/gtmfe ");
+     strcat(cmd, seqFileName);
 	executeCommand(cmd);
 
 	char* seqName = getSeqName(seqFileName);	
@@ -195,11 +202,20 @@ int main(int argc, char* argv[]){
 
 	//now run same program with this constraint
 	cmd[0] = '\0';
-	strcat(cmd, "./gtmfe -v -c constraints.txt ");strcat(cmd, seqFileName);
+	strcat(cmd, "./bin/gtmfe -v -c ");
+     strcat(cmd, CONSTRAINTS_FILE_NAME);
+     strcat(cmd, " ");
+     strcat(cmd, seqFileName);
 	executeCommand(cmd);	
+ 
+     // Wrap up running the test case by unlinking the generated constraints.txt file:
+     unlink(CONSTRAINTS_FILE_NAME);
 
 	int passed = validateCtFileForSSconstraint(ctFileName, constrs);
 	if(passed==1){
 		printf("Single constraint test passed\n");
+          exit(0);
 	}
+     exit(-1);
+    
 }

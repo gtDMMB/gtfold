@@ -30,7 +30,7 @@ set(GTFOLD_PACKAGE_VERSION ${VERSION})
 set(GTFOLD_PACKAGE_STRING "${GTFOLD_PACKAGE_NAME} v${GTFOLD_PACKAGE_VERSION}")
 
 ## Option to enable auto running of unit tests after recompiling:
-option(RUN_UNIT_TESTS "Enable running tests after build" OFF)
+option(RUN_UNIT_TESTS "Enable running tests after build" FALSE)
 
 ## Configure pkg-config script for some dependency libraries (LIBGMP and LIBGMPXX):
 include(FindPkgConfig)
@@ -67,7 +67,7 @@ set(PROJECT_GTFOLDMFE_SOURCE_DIR "${PROJECT_SOURCE_DIR}/gtfold-mfe")
 include_directories("${PROJECT_GTFOLDMFE_SOURCE_DIR}/include")
 
 add_executable(
-    gtfold ${ALL_TARGET_SOURCES} gtfold-mfe/src/main.cc
+    gtfold ${ALL_TARGET_SOURCES} gtfold-mfe/src/binexe-utils/main.cc
 )
 set_target_properties(
      gtfold PROPERTIES
@@ -76,29 +76,11 @@ set_target_properties(
 )
 
 add_executable(
-    gtmfe ${ALL_TARGET_SOURCES} gtfold-mfe/src/mfe_main.cc
+    gtfold-test ${ALL_TARGET_SOURCES} gtfold-mfe/src/binexe-utils/test_ss_constraint.c
 )
 set_target_properties(
-     gtmfe PROPERTIES
-     OUTPUT_NAME "gtmfe"
-     COMPILE_FLAGS "${CMAKE_CXX_FLAGS}"
-)
-
-add_executable(
-    gtboltzmann ${ALL_TARGET_SOURCES} gtfold-mfe/src/boltzmann_main.cc
-)
-set_target_properties(
-     gtboltzmann PROPERTIES
-     OUTPUT_NAME "gtboltzmann"
-     COMPILE_FLAGS "${CMAKE_CXX_FLAGS}"
-)
-
-add_executable(
-    gtsubopt ${ALL_TARGET_SOURCES} gtfold-mfe/src/subopt_main.cc
-)
-set_target_properties(
-     gtsubopt PROPERTIES
-     OUTPUT_NAME "gtsubopt"
+     gtfold-test PROPERTIES
+     OUTPUT_NAME "gtfold-test"
      COMPILE_FLAGS "${CMAKE_CXX_FLAGS}"
 )
 
@@ -138,22 +120,12 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS}")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS}")
 
 install(
-     TARGETS gtmfe gtboltzmann gtsubopt gtfold
+     TARGETS gtfold gtfold-test
      DESTINATION ${EXECUTABLE_OUTPUT_PATH}
 )
 
 ## Running of unit tests configuration:
-#### -- TODO ... --- 
-function(Func_runUnitTest UnitTestName)
-     add_test(NAME "GTFoldUnitTestCheck-${UnitTestName}" COMMAND gtfold-tests -n ${UnitTestName} -a -s)
-     set_tests_properties(
-          "GTFoldUnitTestCheck-${UnitTestName}" PROPERTIES
-         PASS_REGULAR_EXPRESSION "All tests passed .*"
-     )
-endfunction(Func_runUnitTest)
-
-if(RUN_UNIT_TESTS)
-     enable_testing()
-     message("Running *ALL* unit tests -- NOTE: This can take a long time -- ...")
-     #Func_runUnitTest("16S")
-endif()
+add_custom_command(
+    TARGET gtfold-test POST_BUILD
+    COMMAND bash -c "${CMAKE_COMMAND} -DRUN_UNIT_TESTS=${RUN_UNIT_TESTS} -P CMakeRunUnitTests.cmake"
+)

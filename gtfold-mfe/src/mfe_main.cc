@@ -183,7 +183,7 @@ int mfe_main(int argc, char** argv) {
 	init_fold(seq.c_str());
 	
 	// Read in thermodynamic parameters. Always use Turner99 data (for now)
-  readThermodynamicParameters(paramDir.c_str(), PARAM_DIR, UNAMODE, RNAMODE, T_MISMATCH);
+     readThermodynamicParameters(paramDir.c_str(), PARAM_DIR, UNAMODE, RNAMODE, T_MISMATCH);
 	printRunConfiguration(seq);
 
 	if(!SILENT) printf("\nComputing minimum free energy structure...\n");

@@ -2,11 +2,13 @@
 #define _OPTIONS_H_
 
 #include <stdlib.h>
-#include <string>
-#include <cstring>
 #include <stdio.h>
 
-using namespace std;
+#ifdef __cplusplus 
+     #include <string>
+     #include <cstring>
+     using namespace std;
+#endif
 
 //extern bool ILSA;
 //extern bool NOISOLATE;

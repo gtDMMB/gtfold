@@ -104,8 +104,10 @@ void readThermodynamicParameters(const char *userdatadir,bool userdatalogic, int
 			opt3 += "/data";
 		}
 
+          int envVarExactPath = 0;
 		if (stat(opt2.c_str(), &buf) == 0) {
 			found = true;
+               envVarExactPath = 1;
 			EN_DATADIR.assign(opt2);
 			fprintf(stdout,"Checking for environ variable 'GTFOLDDATADIR', found \n");
 		} else {
@@ -129,18 +131,20 @@ void readThermodynamicParameters(const char *userdatadir,bool userdatalogic, int
 			if (found == false)	fprintf(stdout,"Checking under current dir '%s', not found.\n", opt3.c_str());
 		}
 
-		EN_DATADIR += "/";
 		if (found == false) {
 			exit(-1);
 		}	
 
-		if (unamode) {
-			EN_DATADIR += "UNAParams";
-		}else if (rnamode) {
-			EN_DATADIR += "RNAParams";
-		} else {
-			EN_DATADIR += "Turner99";
-		}
+          /*if(envVarExactPath == 0) {
+		   EN_DATADIR += "/";
+		   if (unamode) {
+			   EN_DATADIR += "UNAParams";
+		   }else if (rnamode) {
+			   EN_DATADIR += "RNAParams";
+		   } else {
+		   	   EN_DATADIR += "Turner99";
+		   }
+          }*/
 	}
 	else {
 		EN_DATADIR.assign(userdatadir);
@@ -150,7 +154,7 @@ void readThermodynamicParameters(const char *userdatadir,bool userdatalogic, int
 		}
 	}
 
-	//Handle the ending forward slash case
+	// Handle the ending forward slash case
 	if (EN_DATADIR[EN_DATADIR.length() - 1] != '/') {
 		EN_DATADIR += "/";
 	}

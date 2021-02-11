@@ -49,9 +49,9 @@ $ cd gtfold
 (On MacOS)
 $ cmake -v . -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="/usr/local/opt/llvm/bin/clang" \
      -DCMAKE_CXX_COMPILER="/usr/local/opt/llvm/bin/clang++" \
-     -DRUN_UNIT_TESTS="ON"
+     -DRUN_UNIT_TESTS="1"
 (On Linux/Unix)
-$ cmake -v . -DCMAKE_BUILD_TYPE=Release -DRUN_UNIT_TESTS="ON"
+$ cmake -v . -DCMAKE_BUILD_TYPE=Release -DRUN_UNIT_TESTS="1"
 $ make
 ```
 
@@ -80,10 +80,10 @@ actual directory you are located in at runtime.
 **(On MacOS):**
 ```bash
 $ export gtfoldCwd="$(greadlink -f .)"
-$ echo "alias gtfold='$gtfoldCwd/gtfold'" >> ~/.bash_profile
-$ echo "alias gtmfe='$gtfoldCwd/gtmfe'" >> ~/.bash_profile
-$ echo "alias gtboltzmann='$gtfoldCwd/gtboltzmann'" >> ~/.bash_profile
-$ echo "alias gtsubopt='$gtfoldCwd/gtsubopt'" >> ~/.bash_profile
+$ echo "alias gtfold='$gtfoldCwd/bin/gtfold'" >> ~/.bash_profile
+$ echo "alias gtmfe='$gtfoldCwd/bin/gtmfe'" >> ~/.bash_profile
+$ echo "alias gtboltzmann='$gtfoldCwd/bin/gtboltzmann'" >> ~/.bash_profile
+$ echo "alias gtsubopt='$gtfoldCwd/bin/gtsubopt'" >> ~/.bash_profile
 $ source ~/.bash_profile
 ```
 Note that if ``greadlink`` is not found, you can install it using ``brew`` by running 
@@ -93,9 +93,9 @@ $ brew install greadlink
 **(On Linux/Unix):**
 ```bash
 $ export gtfoldCwd="$(readlink -f .)"
-$ echo "alias gtfold='$gtfoldCwd/gtfold'" >> ~/.bashrc
-$ echo "alias gtmfe='$gtfoldCwd/gtmfe'" >> ~/.bashrc
-$ echo "alias gtboltzmann='$gtfoldCwd/gtboltzmann'" >> ~/.bashrc
-$ echo "alias gtsubopt='$gtfoldCwd/gtsubopt'" >> ~/.bashrc
+$ echo "alias gtfold='$gtfoldCwd/bin/gtfold'" >> ~/.bashrc
+$ echo "alias gtmfe='$gtfoldCwd/bin/gtmfe'" >> ~/.bashrc
+$ echo "alias gtboltzmann='$gtfoldCwd/bin/gtboltzmann'" >> ~/.bashrc
+$ echo "alias gtsubopt='$gtfoldCwd/bin/gtsubopt'" >> ~/.bashrc
 $ source ~/.bashrc
 ```
