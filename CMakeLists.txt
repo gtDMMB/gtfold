@@ -76,6 +76,33 @@ set_target_properties(
 )
 
 add_executable(
+    gtmfe ${ALL_TARGET_SOURCES} gtfold-mfe/src/mfe_main.cc gtfold-mfe/src/binexe-utils/main.cc
+)
+set_target_properties(
+     gtmfe PROPERTIES
+     OUTPUT_NAME "gtmfe"
+     COMPILE_FLAGS "${CMAKE_CXX_FLAGS}"
+)
+
+add_executable(
+    gtsubopt ${ALL_TARGET_SOURCES} gtfold-mfe/src/subopt_main.cc gtfold-mfe/src/binexe-utils/main.cc
+)
+set_target_properties(
+     gtsubopt PROPERTIES
+     OUTPUT_NAME "gtsubopt"
+     COMPILE_FLAGS "${CMAKE_CXX_FLAGS}"
+)
+
+add_executable(
+    gtboltzmann ${ALL_TARGET_SOURCES} gtfold-mfe/src/boltzmann_main.cc gtfold-mfe/src/binexe-utils/main.cc
+)
+set_target_properties(
+     gtboltzmann PROPERTIES
+     OUTPUT_NAME "gtboltzmann"
+     COMPILE_FLAGS "${CMAKE_CXX_FLAGS}"
+)
+
+add_executable(
     gtfold-test ${ALL_TARGET_SOURCES} gtfold-mfe/src/binexe-utils/test_ss_constraint.c
 )
 set_target_properties(
@@ -120,7 +147,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS}")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS}")
 
 install(
-     TARGETS gtfold gtfold-test
+     TARGETS gtfold gtmfe gtsubopt gtboltzmann gtfold-test
      DESTINATION ${EXECUTABLE_OUTPUT_PATH}
 )
 
