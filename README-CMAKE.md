@@ -16,8 +16,19 @@ programs is [found here](http://gtfold.sourceforge.net/guide.html).
 
 Using the Homebrew package manager, run the following command:
 ```bash
+$ brew install llvm@11 libomp cmake
+```
+If any of the above commands fail due to an existing installation of the 
+package, try running the following command instead:
+```bash
 $ brew upgrade llvm libomp cmake
 ```
+The versions of the ``brew`` packages used for testing are ``libomp`` (**11.0.1**) and 
+``cmake`` (**3.19.4**). 
+The ``llvm`` package installs a more recent version of the ``clang`` compiler 
+toolchain than ships with current MacOS builds. It is necessary to upgrade because 
+the default ``gcc`` (symlinked to a dated ``clang`` binary by default) on Mojave/10.14 
+is not modern enough to support the C++ standards we require for the GTFold build process.
 
 ### On recent Debian Linux variants (including Ubuntu)
 
