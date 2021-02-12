@@ -25,3 +25,5 @@ cmake_install.cmake
 CMakeFiles/*
 cmake-build/*
 bin/*
+*.ct
+*.seq
