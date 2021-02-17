@@ -124,14 +124,14 @@ endif()
 if(APPLE)
     #"${CMAKE_CXX_FLAGS} -Wall -std=c++14 -stdlib=libc++ -fPIC -fopenmp -g -O2 -fno-lto
     set(CMAKE_CXX_FLAGS
-        "${CMAKE_CXX_FLAGS} -Wall -mlinker-version=0 -std=c++11 -fPIC -fopenmp -g -O2 -fno-lto \
+        "${CMAKE_CXX_FLAGS} -Wall -mlinker-version=450 -std=c++11 -fPIC -fopenmp -g -O2 -fno-lto \
         -I/usr/local/include -I/usr/local/opt/llvm/include -Igtfold-mfe/include/ \
         ${PC_GMP_INCLUDE_DIRS} ${PC_GMPXX_INCLUDE_DIRS} \
         -DGTFOLD_PACKAGE_VERSION=\"${GTFOLD_PACKAGE_VERSION}\""
     )
     set(CMAKE_EXE_LINKER_FLAGS
         "${CMAKE_CXX_FLAGS} ${CMAKE_EXE_LINKER_FLAGS} \
-         -mlinker-version=0 -L/usr/local/lib -lgmp -lgmpxx -lm -lpthread \
+         -mlinker-version=450 -L/usr/local/lib -lgmp -lgmpxx -lm -lpthread \
         ${PC_GMP_LIBRARIES} ${PC_GMPXX_LIBRARIES}"
     )
 elseif(UNIX AND NOT APPLE) # Primary target: Linux (typically RHEL)
