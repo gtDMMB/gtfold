@@ -124,7 +124,7 @@ endif()
 if(APPLE)
     #"${CMAKE_CXX_FLAGS} -Wall -std=c++14 -stdlib=libc++ -fPIC -fopenmp -g -O2 -fno-lto
     set(CMAKE_CXX_FLAGS
-        "${CMAKE_CXX_FLAGS} -Wall -mlinker-version=450 -std=c++11 -fPIC -fopenmp -g -O2 -fno-lto \
+        "${CMAKE_CXX_FLAGS} -Wall -mlinker-version=450 -std=c++14 -fPIC -fopenmp -g -O2 -fno-lto \
         -I/usr/local/include -I/usr/local/opt/llvm/include -Igtfold-mfe/include/ \
         ${PC_GMP_INCLUDE_DIRS} ${PC_GMPXX_INCLUDE_DIRS} \
         -DGTFOLD_PACKAGE_VERSION=\"${GTFOLD_PACKAGE_VERSION}\""
