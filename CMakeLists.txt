@@ -17,6 +17,7 @@ set(SHELL /bin/bash)
 set(CMAKE_RULE_MESSAGES ON)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
+set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 
 ## Define the PMFE project and define the output binaries:
 project(gtDMMB_PMFE)
