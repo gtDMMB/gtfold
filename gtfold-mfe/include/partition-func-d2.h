@@ -1,6 +1,6 @@
 #ifndef _PARTITION_FUNCTION_D2_H
 #define _PARTITION_FUNCTION_D2_H
-#include<iostream>
+#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -94,6 +94,10 @@ class PartitionFunctionD2{
 		void printAllMatrixesToFile(std::string pfArraysOutputFile);
 };
 
+#endif
+
+#ifndef _PARTITION_FUNCTION_D2_SRC_H
+#define _PARTITION_FUNCTION_D2_SRC_H
 
 //Now the definitions of all these method starts, earlier they were in separate C++ source file and then I needed to move them to header file only because of this
 //http://www.parashift.com/c%2B%2B-faq-lite/templates-defn-vs-decl.html

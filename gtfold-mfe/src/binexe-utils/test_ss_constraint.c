@@ -210,6 +210,7 @@ int main(int argc, char* argv[]){
  
      // Wrap up running the test case by unlinking the generated constraints.txt file:
      unlink(CONSTRAINTS_FILE_NAME);
+     //unlink(ctFileName);
 
 	int passed = validateCtFileForSSconstraint(ctFileName, constrs);
 	if(passed==1){
