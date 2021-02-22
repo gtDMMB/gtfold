@@ -47,7 +47,8 @@ $ git clone https://github.com/gtDMMB/gtfold.git
 $ cd gtfold
 (On MacOS)
 $ cmake -v . -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="/usr/local/opt/llvm/bin/clang" \
-     -DCMAKE_CXX_COMPILER="/usr/local/opt/llvm/bin/clang++"
+     -DCMAKE_CXX_COMPILER="/usr/local/opt/llvm/bin/clang++" \
+     -DCMAKE_C_LINK_EXECUTABLE="/usr/local/opt/llvm/bin/ld.lld"
 (On Linux/Unix)
 $ cmake -v . -DCMAKE_BUILD_TYPE=Release
 $ make
@@ -60,6 +61,7 @@ $ cd gtfold
 (On MacOS)
 $ cmake -v . -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="/usr/local/opt/llvm/bin/clang" \
      -DCMAKE_CXX_COMPILER="/usr/local/opt/llvm/bin/clang++" \
+     -DCMAKE_C_LINK_EXECUTABLE="/usr/local/opt/llvm/bin/ld.lld" \
      -DRUN_UNIT_TESTS="1"
 (On Linux/Unix)
 $ cmake -v . -DCMAKE_BUILD_TYPE=Release -DRUN_UNIT_TESTS="1"
