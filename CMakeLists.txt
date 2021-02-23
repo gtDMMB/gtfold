@@ -131,9 +131,14 @@ if(APPLE)
     )
     set(CMAKE_EXE_LINKER_FLAGS
         "${CMAKE_CXX_FLAGS} ${CMAKE_EXE_LINKER_FLAGS} \
-         -mlinker-version=450 -L/usr/local/lib -lgmp -lgmpxx -lm -lpthread \
+         -mlinker-version=450 -L/usr/local/lib -lm -lpthread \
         ${PC_GMP_LIBRARIES} ${PC_GMPXX_LIBRARIES}"
     )
+    #set(CMAKE_EXE_LINKER_FLAGS
+    #    "${CMAKE_CXX_FLAGS} ${CMAKE_EXE_LINKER_FLAGS} \
+    #     -mlinker-version=450 -L/usr/local/lib -lgmp -lgmpxx -lm -lpthread \
+    #    ${PC_GMP_LIBRARIES} ${PC_GMPXX_LIBRARIES}"
+    #)
 elseif(UNIX AND NOT APPLE) # Primary target: Linux (typically RHEL)
     set(CMAKE_CXX_FLAGS
         "-fPIC -fopenmp -Wall -g -O2 -fvisibility=hidden -fvisibility-inlines-hidden \
