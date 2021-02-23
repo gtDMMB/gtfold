@@ -126,19 +126,16 @@ if(APPLE)
     set(CMAKE_CXX_FLAGS
         "${CMAKE_CXX_FLAGS} -Wall -mlinker-version=450 -std=c++14 -fPIC -fopenmp -g -O2 -fno-lto \
         -I/usr/local/include -I/usr/local/opt/llvm/include -Igtfold-mfe/include/ \
-        -DGTFOLD_PACKAGE_VERSION=\"${GTFOLD_PACKAGE_VERSION}\""
-         #${PC_GMP_INCLUDE_DIRS} ${PC_GMPXX_INCLUDE_DIRS} \
+        -DGTFOLD_PACKAGE_VERSION=\"${GTFOLD_PACKAGE_VERSION}\"" \
+        ${PC_GMP_INCLUDE_DIRS} ${PC_GMPXX_INCLUDE_DIRS} \
     )
+    # NOTE: Providing the explicit LLVM linker path seems to fix the problems on Mojave.
     set(CMAKE_EXE_LINKER_FLAGS
         "${CMAKE_CXX_FLAGS} ${CMAKE_EXE_LINKER_FLAGS} \
          -mlinker-version=450 -L/usr/local/lib -lm -lpthread \
+        -L/usr/local/opt/llvm/lib \
         ${PC_GMP_LIBRARIES} ${PC_GMPXX_LIBRARIES}"
     )
-    #set(CMAKE_EXE_LINKER_FLAGS
-    #    "${CMAKE_CXX_FLAGS} ${CMAKE_EXE_LINKER_FLAGS} \
-    #     -mlinker-version=450 -L/usr/local/lib -lgmp -lgmpxx -lm -lpthread \
-    #    ${PC_GMP_LIBRARIES} ${PC_GMPXX_LIBRARIES}"
-    #)
 elseif(UNIX AND NOT APPLE) # Primary target: Linux (typically RHEL)
     set(CMAKE_CXX_FLAGS
         "-fPIC -fopenmp -Wall -g -O2 -fvisibility=hidden -fvisibility-inlines-hidden \
