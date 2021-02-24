@@ -3,7 +3,8 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+//#include <string.h>
+#include <cstring>
 #include <math.h>
 
 //#include "MyDouble.cc"
@@ -106,7 +107,7 @@ class PartitionFunctionD2{
 #include "algorithms-partition.h"
 #include "global.h"
 #include "utils.h"
-#include<omp.h>
+#include <omp.h>
 #include <assert.h>
 #define MEMORY_OPTIMIZATION_ENABLED false
 #define PAIRABLE_POINTS_GATHER_OPTIMIZATION_DISABLED true

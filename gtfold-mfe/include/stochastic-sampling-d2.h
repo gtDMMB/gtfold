@@ -129,7 +129,8 @@ public:
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+//#include <string.h>
+#include <cstring>
 #include <stack>
 #include <map>
 #include<sstream>
