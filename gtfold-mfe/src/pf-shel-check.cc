@@ -1,5 +1,9 @@
-#include "pf-shel-check.h"
+#include <stddef.h>
+#include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+
+#include "pf-shel-check.h"
 
 /* Documentation of type codes:
 0 = u

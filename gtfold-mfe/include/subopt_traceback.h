@@ -23,6 +23,10 @@
 #ifndef _SUBOPT_TRACEBACK_H
 #define _SUBOPT_TRACEBACK_H
 
+#include <stddef.h>
+#include <stdlib.h>
+#include <stdio.h>
+
 #include <cassert>
 #include <iostream>
 #include <sstream>

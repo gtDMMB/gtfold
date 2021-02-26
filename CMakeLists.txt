@@ -124,8 +124,9 @@ endif()
 if(APPLE)
     set(CMAKE_CXX_FLAGS
         "${CMAKE_CXX_FLAGS} -Wall -mlinker-version=450 -isystem /usr/local/opt/llvm/include \
-        -std=c++14 -fPIC -fopenmp -g -O2 -fno-lto \
-        -nostdinc++ -I/usr/local/opt/llvm/include/c++/v1 /usr/local/opt/llvm/lib/libc++.dylib -lstdc++  \
+        -std=c++17 -fPIC -fopenmp -g -O2 -fno-lto \
+        -stdlib=libc++ -nostdinc++ \
+        -I/usr/local/opt/llvm/include/c++/v1 /usr/local/opt/llvm/lib/libc++.dylib -lc++  \
         -I/usr/local/opt/llvm/include -I/usr/local/include -Igtfold-mfe/include/ \
         -DGTFOLD_PACKAGE_VERSION=\"${GTFOLD_PACKAGE_VERSION}\"" #${PC_GMP_INCLUDE_DIRS} ${PC_GMPXX_INCLUDE_DIRS}
     )

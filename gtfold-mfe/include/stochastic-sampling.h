@@ -1,6 +1,10 @@
 #ifndef __STOCHASTIC_SAMPLING__
 #define __STOCHASTIC_SAMPLING__
 
+#include <stddef.h>
+#include <stdlib.h>
+#include <stdio.h>
+
 #include <iostream>
 #include <stdlib.h>
 #include "partition-func.h"

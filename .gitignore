@@ -27,3 +27,4 @@ cmake-build/*
 bin/*
 *.ct
 *.seq
+*.out.txt

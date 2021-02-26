@@ -1,6 +1,10 @@
 #ifndef _GLOBAL_H_
 #define _GLOBAL_H_
 
+#include <stddef.h>
+#include <stdlib.h>
+#include <stdio.h>
+
 #include "constants.h"
 
 #ifdef __cplusplus

@@ -1,6 +1,10 @@
 #ifndef _STOCHASTIC_SAMPLING_D2_H
 #define _STOCHASTIC_SAMPLING_D2_H
 
+#include <stddef.h>
+#include <stdlib.h>
+#include <stdio.h>
+
 #include "pf-shel-check.h"
 #include <iostream>
 #include <fstream>

@@ -1,6 +1,10 @@
 #ifndef _ADVANCED_DOUBLE_H_
 #define _ADVANCED_DOUBLE_H_
 
+#include <stddef.h>
+#include <stdlib.h>
+#include <stdio.h>
+
 #include<iostream>
 #include<stdio.h>
 #include<stdlib.h>

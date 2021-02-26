@@ -1,8 +1,10 @@
 #ifndef _PARTITION_FUNCTION_D2_H
 #define _PARTITION_FUNCTION_D2_H
-#include <iostream>
-#include <stdio.h>
+
+#include <stddef.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <iostream>
 //#include <string.h>
 #include <cstring>
 #include <math.h>

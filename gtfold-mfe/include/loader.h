@@ -20,6 +20,10 @@
 #ifndef _LOADER_H
 #define _LOADER_H
 
+#include <stddef.h>
+#include <stdlib.h>
+#include <stdio.h>
+
 #include <string>
 
 #include "constants.h"
