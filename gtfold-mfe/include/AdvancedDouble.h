@@ -10,7 +10,10 @@
 #include<stdlib.h>
 #include<math.h>
 #include "gmp.h"
-using namespace std;
+
+using size_t = std::size_t;
+using ptrdiff_t = std::ptrdiff_t;
+//using namespace std;
 
 extern int g_bignumprecision;
 const int PRINT_DIGITS_AFTER_DECIMAL = 20;
