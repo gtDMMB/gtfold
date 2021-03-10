@@ -25,7 +25,8 @@ $ brew upgrade llvm libomp cmake
 ```
 The versions of the ``brew`` packages used for testing are ``libomp`` (**11.0.1**) and 
 ``cmake`` (**3.19.4**). 
-The ``llvm`` package installs a more recent version of the ``clang`` compiler 
+The ``llvm`` package (**llvm: stable 11.1.0 (bottled)**) 
+installs a more recent version of the ``clang`` compiler 
 toolchain than ships with current MacOS builds. It is necessary to upgrade because 
 the default ``gcc`` (symlinked to a dated ``clang`` binary by default) on Mojave/10.14 
 is not modern enough to support the C++ standards we require for the GTFold build process.
