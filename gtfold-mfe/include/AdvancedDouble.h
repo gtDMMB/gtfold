@@ -1,14 +1,14 @@
 #ifndef _ADVANCED_DOUBLE_H_
 #define _ADVANCED_DOUBLE_H_
 
-#include <stddef.h>
-#include <stdlib.h>
-#include <stdio.h>
+//#include <stddef.h>
+//#include <stdlib.h>
+//#include <stdio.h>
 
 #include<iostream>
-#include<stdio.h>
-#include<stdlib.h>
-#include<math.h>
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<math.h>
 #include "gmp.h"
 
 #include <cstddef>
@@ -17,6 +17,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <cwchar> 
+#include <cmath>
 
 using namespace std;
 using size_t = std::size_t;
