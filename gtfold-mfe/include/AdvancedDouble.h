@@ -1,17 +1,6 @@
 #ifndef _ADVANCED_DOUBLE_H_
 #define _ADVANCED_DOUBLE_H_
 
-//#include <stddef.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-
-#include<iostream>
-//#include<stdio.h>
-//#include<stdlib.h>
-#include<math.h>
-#include "gmp.h"
-
 #include <cstddef>
 #include <cstdio>
 #include <cstring>
@@ -20,9 +9,20 @@
 #include <cwchar> 
 #include <cmath>
 
+#include <stddef.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
 using namespace std;
 using size_t = std::size_t;
 using ptrdiff_t = std::ptrdiff_t;
+
+#include<iostream>
+//#include<stdio.h>
+//#include<stdlib.h>
+#include<math.h>
+#include "gmp.h"
 
 extern int g_bignumprecision;
 const int PRINT_DIGITS_AFTER_DECIMAL = 20;
