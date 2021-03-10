@@ -9,14 +9,14 @@
 #include <cwchar> 
 #include <cmath>
 
+using namespace std;
+using size_t = std::size_t;
+using ptrdiff_t = std::ptrdiff_t;
+
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-
-using namespace std;
-using size_t = std::size_t;
-using ptrdiff_t = std::ptrdiff_t;
 
 #include<iostream>
 //#include<stdio.h>
