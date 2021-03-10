@@ -2,13 +2,14 @@
 #define _ADVANCED_DOUBLE_H_
 
 //#include <stddef.h>
-//#include <stdlib.h>
-//#include <stdio.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 #include<iostream>
 //#include<stdio.h>
 //#include<stdlib.h>
-//#include<math.h>
+#include<math.h>
 #include "gmp.h"
 
 #include <cstddef>
