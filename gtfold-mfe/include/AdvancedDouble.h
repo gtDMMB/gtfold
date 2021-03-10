@@ -11,6 +11,13 @@
 #include<math.h>
 #include "gmp.h"
 
+#include <cstddef>
+#include <cstdio>
+#include <cstring>
+#include <ctime>
+#include <cstdlib>
+#include <cwchar> 
+
 using namespace std;
 using size_t = std::size_t;
 using ptrdiff_t = std::ptrdiff_t;
