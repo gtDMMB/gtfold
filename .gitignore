@@ -28,3 +28,6 @@ bin/*
 *.ct
 *.seq
 *.out.txt
+
+# Build time generated headers
+gtfold-mfe/include/ThermoConfig.h

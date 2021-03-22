@@ -46,6 +46,7 @@
 #include "constraints.h"
 #include "traceback.h"
 #include "shapereader.h"
+#include "ThermoConfig.h"
 
 using namespace std;
 
@@ -189,6 +190,7 @@ int mfe_main(int argc, char** argv) {
 	init_fold(seq.c_str());
 	
 	// Read in thermodynamic parameters. Always use Turner99 data (for now)
+     paramDir = GTFoldConfig::GetGTFoldThermoParamsDirectory();
      readThermodynamicParameters(paramDir.c_str(), PARAM_DIR, UNAMODE, RNAMODE, T_MISMATCH);
 	printRunConfiguration(seq);
 

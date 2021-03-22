@@ -1,0 +1,45 @@
+/* ThermoConfig.h.in : Skeleton file to create a configuration header with 
+ *                     absolute paths at build time;
+ * Author: Maxie D. Schmidt (github/maxieds)
+ * Created: 2021.03.22
+ */
+
+#ifndef __GTFOLD_LOCAL_THERMO_CONFIG__
+#define __GTFOLD_LOCAL_THERMO_CONFIG__
+
+#include <string>
+
+namespace GTFoldConfig {
+
+     static const char *GTFOLD_THERMO_PARAMS_BASE_DATA_DIR = "<THERMO-PARAMS-PATH>";
+
+     typedef enum {
+          NONE       = 0,
+          ANDRONESCU = 1,
+          RNAPARAMS  = 2,
+          TURNER04   = 3,
+          TURNER99   = 4,
+          UNAPARAMS  = 5,
+     } ThermoParamsDataSet_t;
+
+     static const char *GTFOLD_THERMO_PARAMS_DATA_SET_PATHS[] = {
+          "",
+          "Andronescu",
+          "RNAParams",
+          "Turner04",
+          "Turner99",
+          "UNAParams",
+     };
+
+     static inline std::string GetGTFoldThermoParamsDirectory(ThermoParamsDataSet_t tpDataSet = GTFoldConfig::TURNER99) { 
+          std::string fullDataSetPath = std::string(GTFoldConfig::GTFOLD_THERMO_PARAMS_BASE_DATA_DIR); 
+          if(fullDataSetPath.at(fullDataSetPath.length() - 1) != '/' && tpDataSet != GTFoldConfig::NONE) {
+               fullDataSetPath += std::string("/");
+          }
+          fullDataSetPath += std::string(GTFOLD_THERMO_PARAMS_DATA_SET_PATHS[tpDataSet]);
+          return fullDataSetPath;
+     }
+
+}
+
+#endif

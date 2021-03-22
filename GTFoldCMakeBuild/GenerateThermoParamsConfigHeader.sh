@@ -1,0 +1,23 @@
+#!/bin/bash
+
+SED=`which sed`
+READLINK=`which readlink`
+
+OS_PLATFORM=`uname -s`
+if [[ "${OS_PLATFORM}" == "Darwin" ]]; then
+     SED=`which gsed`
+     READLINK=`which greadlink`
+fi
+
+GTFOLD_INCLUDE_PATH=`$READLINK -f gtfold-mfe/include/`
+GTFOLD_CONFIG_HEADER_BASE=`$READLINK -f $GTFOLD_INCLUDE_PATH/ThermoConfig.h`
+GTFOLD_THERMO_PARAMS_ABSPATH=`$READLINK -f $GTFOLD_INCLUDE_PATH/../data`
+GTFOLD_THERMO_PARAMS_ABSPATH=$(echo $GTFOLD_THERMO_PARAMS_ABSPATH | $SED -e 's/\//\\\//g')
+
+echo $GTFOLD_THERMO_PARAMS_ABSPATH
+
+cat $GTFOLD_CONFIG_HEADER_BASE.in | $SED -e "s/<THERMO-PARAMS-PATH>/${GTFOLD_THERMO_PARAMS_ABSPATH}/g" > $GTFOLD_CONFIG_HEADER_BASE
+
+cat $GTFOLD_CONFIG_HEADER_BASE
+
+exit 0
