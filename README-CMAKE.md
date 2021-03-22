@@ -60,7 +60,8 @@ $ cd gtfold
 $ rm -rf CMakeCache.txt CMakeFiles/
 (On MacOS)
 $ cmake -v . -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="/usr/local/Cellar/gcc/10.2.0_4/bin/gcc-10" \
-             -DCMAKE_CXX_COMPILER="/usr/local/Cellar/gcc/10.2.0_4/bin/g++-10"
+             -DCMAKE_CXX_COMPILER="/usr/local/Cellar/gcc/10.2.0_4/bin/g++-10" \
+             -DCMAKE_C_LINK_EXECUTABLE="/usr/local/Cellar/gcc/10.2.0_4/bin/g++-10"
 (On Linux/Unix)
 $ cmake -v . -DCMAKE_BUILD_TYPE=Release
 $ make
