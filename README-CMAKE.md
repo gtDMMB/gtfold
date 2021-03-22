@@ -16,7 +16,7 @@ programs is [found here](http://gtfold.sourceforge.net/guide.html).
 
 Using the Homebrew package manager, run the following command:
 ```bash
-$ brew install llvm@11 libomp cmake
+$ brew install gcc@10 libomp cmake
 ```
 If any of the above commands fail due to an existing installation of the 
 package, try running the following command instead:
@@ -25,7 +25,18 @@ $ brew upgrade llvm libomp cmake
 ```
 The versions of the ``brew`` packages used for testing are ``libomp`` (**11.0.1**) and 
 ``cmake`` (**3.19.4**). 
-The ``llvm`` package (**llvm: stable 11.1.0 (bottled)**) 
+The ``gcc@10`` package built with the options
+```bash
+$ g++-10 -v
+Using built-in specs.
+COLLECT_GCC=g++-10
+COLLECT_LTO_WRAPPER=/usr/local/Cellar/gcc/10.2.0_4/libexec/gcc/x86_64-apple-darwin18/10.2.0/lto-wrapper
+Target: x86_64-apple-darwin18
+Configured with: ../configure --build=x86_64-apple-darwin18 --prefix=/usr/local/Cellar/gcc/10.2.0_4 --libdir=/usr/local/Cellar/gcc/10.2.0_4/lib/gcc/10 --disable-nls --enable-checking=release --enable-languages=c,c++,objc,obj-c++,fortran --program-suffix=-10 --with-gmp=/usr/local/opt/gmp --with-mpfr=/usr/local/opt/mpfr --with-mpc=/usr/local/opt/libmpc --with-isl=/usr/local/opt/isl --with-system-zlib --with-pkgversion='Homebrew GCC 10.2.0_4' --with-bugurl=https://github.com/Homebrew/homebrew-core/issues --disable-multilib --with-native-system-header-dir=/usr/include --with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk SED=/usr/bin/sed
+Thread model: posix
+Supported LTO compression algorithms: zlib
+gcc version 10.2.0 (Homebrew GCC 10.2.0_4) 
+```
 installs a more recent version of the ``clang`` compiler 
 toolchain than ships with current MacOS builds. It is necessary to upgrade because 
 the default ``gcc`` (symlinked to a dated ``clang`` binary by default) on Mojave/10.14 
@@ -46,26 +57,12 @@ Run the following command at your terminal of choice:
 ```bash
 $ git clone https://github.com/gtDMMB/gtfold.git
 $ cd gtfold
+$ rm -rf CMakeCache.txt CMakeFiles/
 (On MacOS)
-$ cmake -v . -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="/usr/local/opt/llvm/bin/clang" \
-     -DCMAKE_CXX_COMPILER="/usr/local/opt/llvm/bin/clang++" \
-     -DCMAKE_C_LINK_EXECUTABLE="/usr/local/opt/llvm/bin/ld.lld"
+$ cmake -v . -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="/usr/local/Cellar/gcc/10.2.0_4/bin/gcc-10" \
+             -DCMAKE_CXX_COMPILER="/usr/local/Cellar/gcc/10.2.0_4/bin/g++-10"
 (On Linux/Unix)
 $ cmake -v . -DCMAKE_BUILD_TYPE=Release
-$ make
-```
-To build *and* run the unit tests included with GTFold, 
-run the following command instead:
-```bash
-$ git clone https://github.com/gtDMMB/gtfold.git
-$ cd gtfold
-(On MacOS)
-$ cmake -v . -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="/usr/local/opt/llvm/bin/clang" \
-     -DCMAKE_CXX_COMPILER="/usr/local/opt/llvm/bin/clang++" \
-     -DCMAKE_C_LINK_EXECUTABLE="/usr/local/opt/llvm/bin/ld.lld" \
-     -DRUN_UNIT_TESTS="1"
-(On Linux/Unix)
-$ cmake -v . -DCMAKE_BUILD_TYPE=Release -DRUN_UNIT_TESTS="1"
 $ make
 ```
 
