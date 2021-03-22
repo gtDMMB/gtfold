@@ -64,7 +64,7 @@ $ cmake -v . -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="/usr/local/Cellar/gc
              -DCMAKE_C_LINK_EXECUTABLE="/usr/local/Cellar/gcc/10.2.0_4/bin/g++-10"
 (On Linux/Unix)
 $ cmake -v . -DCMAKE_BUILD_TYPE=Release
-$ make VERBOSE=1
+$ make clean && make VERBOSE=1
 ```
 
 ### Developers: Cleaning the CMake generated files
