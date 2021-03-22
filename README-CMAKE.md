@@ -25,7 +25,7 @@ $ brew upgrade llvm libomp cmake
 ```
 The versions of the ``brew`` packages used for testing are ``libomp`` (**11.0.1**) and 
 ``cmake`` (**3.19.4**). 
-The ``gcc@10`` package built with the options
+The ``gcc@10`` package is built with the options
 ```bash
 $ g++-10 -v
 Using built-in specs.
@@ -37,7 +37,7 @@ Thread model: posix
 Supported LTO compression algorithms: zlib
 gcc version 10.2.0 (Homebrew GCC 10.2.0_4) 
 ```
-installs a more recent version of the ``clang`` compiler 
+It installs a more recent version of the ``clang`` compiler 
 toolchain than ships with current MacOS builds. It is necessary to upgrade because 
 the default ``gcc`` (symlinked to a dated ``clang`` binary by default) on Mojave/10.14 
 is not modern enough to support the C++ standards we require for the GTFold build process.
