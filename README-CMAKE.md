@@ -21,7 +21,7 @@ $ brew install gcc@10 libomp cmake
 If any of the above commands fail due to an existing installation of the 
 package, try running the following command instead:
 ```bash
-$ brew upgrade llvm libomp cmake
+$ brew upgrade gcc libomp cmake
 ```
 The versions of the ``brew`` packages used for testing are ``libomp`` (**11.0.1**) and 
 ``cmake`` (**3.19.4**). 
