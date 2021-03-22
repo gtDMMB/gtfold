@@ -21,7 +21,7 @@ $ brew install gcc@10 libomp cmake
 If any of the above commands fail due to an existing installation of the 
 package, try running the following command instead:
 ```bash
-$ brew upgrade llvm libomp cmake
+$ brew upgrade gcc libomp cmake
 ```
 The versions of the ``brew`` packages used for testing are ``libomp`` (**11.0.1**) and 
 ``cmake`` (**3.19.4**). 
@@ -64,7 +64,7 @@ $ cmake -v . -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="/usr/local/Cellar/gc
              -DCMAKE_C_LINK_EXECUTABLE="/usr/local/Cellar/gcc/10.2.0_4/bin/g++-10"
 (On Linux/Unix)
 $ cmake -v . -DCMAKE_BUILD_TYPE=Release
-$ make
+$ make clean && make VERBOSE=1
 ```
 
 ### Developers: Cleaning the CMake generated files
