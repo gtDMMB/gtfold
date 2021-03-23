@@ -140,7 +140,7 @@ void readThermodynamicParameters(const char *userdatadir,bool userdatalogic, int
 			exit(-1);
 		}	
 
-          /*if(envVarExactPath == 0) {
+          if(envVarExactPath == 0) {
 		   EN_DATADIR += "/";
 		   if (unamode) {
 			   EN_DATADIR += "UNAParams";
@@ -149,7 +149,7 @@ void readThermodynamicParameters(const char *userdatadir,bool userdatalogic, int
 		   } else {
 		   	   EN_DATADIR += "Turner99";
 		   }
-          }*/
+          }
 	}
 	else {
 		EN_DATADIR.assign(userdatadir);

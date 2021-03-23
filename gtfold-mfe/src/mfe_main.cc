@@ -50,7 +50,7 @@
 
 using namespace std;
 
-static bool PARAM_DIR = false;
+static bool PARAM_DIR = true;
 //static bool LIMIT_DISTANCE;
 static bool CONS_ENABLED = false;
 static bool VERBOSE = false;
@@ -190,7 +190,7 @@ int mfe_main(int argc, char** argv) {
 	init_fold(seq.c_str());
 	
 	// Read in thermodynamic parameters. Always use Turner99 data (for now)
-     paramDir = GTFoldConfig::GetGTFoldThermoParamsDirectory();
+     paramDir = GTFoldConfig::GetGTFoldThermoParamsDirectory(GTFoldConfig::TURNER99);
      readThermodynamicParameters(paramDir.c_str(), PARAM_DIR, UNAMODE, RNAMODE, T_MISMATCH);
 	printRunConfiguration(seq);
 
