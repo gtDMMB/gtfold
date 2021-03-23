@@ -36,7 +36,7 @@ namespace GTFoldConfig {
           if(fullDataSetPath.at(fullDataSetPath.length() - 1) != '/' && tpDataSet != GTFoldConfig::NONE) {
                fullDataSetPath += std::string("/");
           }
-          //fullDataSetPath += std::string(GTFOLD_THERMO_PARAMS_DATA_SET_PATHS[tpDataSet]);
+          fullDataSetPath += std::string(GTFOLD_THERMO_PARAMS_DATA_SET_PATHS[tpDataSet]);
           return fullDataSetPath;
      }
 
