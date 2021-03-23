@@ -156,6 +156,7 @@ if(APPLE)
          -mlinker-version=450 -L/usr/local/lib -lm -lpthread"
     )
 elseif(UNIX AND NOT APPLE) # Primary target: Linux (typically RHEL)
+    ## Untested (need to check this on standard Linux distros) ... 
     set(CMAKE_CXX_FLAGS
         "-fPIC -fopenmp -Wall -g -O2 -fvisibility=hidden -fvisibility-inlines-hidden \
         -Igtfold-mfe/include ${RHEL_INCLUDE_APPENDS} ${CMAKE_CXX_FLAGS}"
