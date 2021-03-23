@@ -50,8 +50,8 @@ $ rm -rf CMakeFiles/
 (On MacOS)
 $ cmake -v . -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="/usr/local/opt/llvm/bin/clang" \
      -DCMAKE_CXX_COMPILER="/usr/local/opt/llvm/bin/clang++" \
-     -DCMAKE_C_LINK_EXECUTABLE="/usr/local/opt/llvm/bin/ld.lld" \
-     -DMAC_ISYSROOT_PATH="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/"
+     #-DCMAKE_C_LINK_EXECUTABLE="/usr/local/opt/llvm/bin/ld.lld" \
+     -DMAC_ISYSROOT_PATH="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr"
 (On Linux/Unix)
 $ cmake -v . -DCMAKE_BUILD_TYPE=Release
 $ make clean && make VERBOSE=1
