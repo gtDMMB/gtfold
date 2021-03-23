@@ -21,7 +21,7 @@ using ptrdiff_t = std::ptrdiff_t;
 #include<iostream>
 //#include<stdio.h>
 //#include<stdlib.h>
-#include<math.h>
+#include <math.h>
 #include "gmp.h"
 
 extern int g_bignumprecision;

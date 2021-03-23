@@ -6,6 +6,7 @@
 ## CMake specific configuration and build environment settings:
 cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 
+set(MACOSX_DEPLOYMENT_TARGET "10.14")
 set(CMAKE_DEBUG_POSTFIX d)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -18,11 +19,10 @@ set(CMAKE_RULE_MESSAGES ON)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
 set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
+set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--as-needed")
 
 ## Define the PMFE project and define the output binaries:
-project(gtDMMB_PMFE)
-
-unset(CMAKE_CXX_FLAGS)
+project(gtDMMB_GTFOLD)
 
 set(GTFOLD_VERSION_MAJOR "1")
 set(GTFOLD_VERSION_MINOR "0")
@@ -46,17 +46,18 @@ execute_process(
      OUTPUT_VARIABLE PC_GMP_INCLUDE_DIRS
 )
 string(STRIP "${PC_GMP_INCLUDE_DIRS}" PC_GMP_INCLUDE_DIRS)
+string(REGEX REPLACE "-I" "" PC_GMP_INCLUDE_DIRS_LIST ${PC_GMP_INCLUDE_DIRS})
 execute_process(
      COMMAND bash -c "pkg-config gmp --libs --static"
      OUTPUT_VARIABLE PC_GMP_LIBRARIES
 )
 string(STRIP "${PC_GMP_LIBRARIES}" PC_GMP_LIBRARIES)
-
 execute_process(
      COMMAND bash -c "pkg-config gmpxx --cflags"
      OUTPUT_VARIABLE PC_GMPXX_INCLUDE_DIRS
 )
 string(STRIP "${PC_GMPXX_INCLUDE_DIRS}" PC_GMPXX_INCLUDE_DIRS)
+string(REGEX REPLACE "-I" "" PC_GMPXX_INCLUDE_DIRS_LIST ${PC_GMPXX_INCLUDE_DIRS})
 execute_process(
      COMMAND bash -c "pkg-config gmpxx --libs --static"
      OUTPUT_VARIABLE PC_GMPXX_LIBRARIES
@@ -65,9 +66,9 @@ string(STRIP "${PC_GMPXX_LIBRARIES}" PC_GMPXX_LIBRARIES)
 
 ## Build the binaries for the GTFold (gtfold-mfe) project:
 
-file(GLOB ALL_TARGET_SOURCES gtfold-mfe/src/*.cc gtfold-mfe/src/*.c gtfold-mfe/include/*.h)
+file(GLOB ALL_TARGET_SOURCES gtfold-mfe/src/*.cc gtfold-mfe/include/*.h)
 set(PROJECT_GTFOLDMFE_SOURCE_DIR "${PROJECT_SOURCE_DIR}/gtfold-mfe")
-include_directories("${PROJECT_GTFOLDMFE_SOURCE_DIR}/include")
+include_directories(${PROJECT_GTFOLDMFE_SOURCE_DIR}/include ${PC_GMP_INCLUDE_DIRS_LIST} ${PC_GMPXX_INCLUDE_DIRS_LIST})
 
 add_custom_command(
     OUTPUT "${PROJECT_GTFOLDMFE_SOURCE_DIR}/include/ThermoConfig.h"
@@ -75,55 +76,75 @@ add_custom_command(
     COMMAND touch "${PROJECT_GTFOLDMFE_SOURCE_DIR}/include/ThermoConfig.h"
 )
 add_custom_target(
-     BuildConfigHeader ALL 
+     BuildConfigHeader ALL
      DEPENDS "${PROJECT_GTFOLDMFE_SOURCE_DIR}/include/ThermoConfig.h"
 )
 
 add_executable(
-    gtfold ${ALL_TARGET_SOURCES} gtfold-mfe/src/binexe-utils/main.cc
+    gtfold gtfold-mfe/src/binexe-utils/main.cc ${ALL_TARGET_SOURCES} 
 )
 set_target_properties(
      gtfold PROPERTIES
      OUTPUT_NAME "gtfold"
      COMPILE_FLAGS "${CMAKE_CXX_FLAGS}"
+     LINKER_FLAGS "${CMAKE_CXX_FLAGS}"
 )
 
 add_executable(
-    gtmfe ${ALL_TARGET_SOURCES} gtfold-mfe/src/mfe_main.cc gtfold-mfe/src/binexe-utils/main.cc
+    gtmfe gtfold-mfe/src/binexe-utils/main.cc
 )
 set_target_properties(
      gtmfe PROPERTIES
      OUTPUT_NAME "gtmfe"
      COMPILE_FLAGS "${CMAKE_CXX_FLAGS}"
 )
+
 add_dependencies(gtmfe BuildConfigHeader)
 
 add_executable(
-    gtsubopt ${ALL_TARGET_SOURCES} gtfold-mfe/src/subopt_main.cc gtfold-mfe/src/binexe-utils/main.cc
+    gtsubopt gtfold-mfe/src/binexe-utils/main.cc
 )
 set_target_properties(
      gtsubopt PROPERTIES
      OUTPUT_NAME "gtsubopt"
      COMPILE_FLAGS "${CMAKE_CXX_FLAGS}"
+     LINKER_FLAGS "${CMAKE_CXX_FLAGS}"
 )
 
 add_executable(
-    gtboltzmann ${ALL_TARGET_SOURCES} gtfold-mfe/src/boltzmann_main.cc gtfold-mfe/src/binexe-utils/main.cc
+    gtboltzmann gtfold-mfe/src/binexe-utils/main.cc
 )
 set_target_properties(
      gtboltzmann PROPERTIES
      OUTPUT_NAME "gtboltzmann"
      COMPILE_FLAGS "${CMAKE_CXX_FLAGS}"
+     LINKER_FLAGS "${CMAKE_CXX_FLAGS}"
 )
 
 add_executable(
-    gtfold-test ${ALL_TARGET_SOURCES} gtfold-mfe/src/binexe-utils/test_ss_constraint.c
+    gtfold-test gtfold-mfe/src/binexe-utils/test_ss_constraint.c
 )
 set_target_properties(
      gtfold-test PROPERTIES
      OUTPUT_NAME "gtfold-test"
      COMPILE_FLAGS "${CMAKE_CXX_FLAGS}"
+     LINKER_FLAGS "${CMAKE_CXX_FLAGS}"
 )
+
+## Python3-config is knowledgeable on MacOS. We do not need Python3 here, but the 
+## config settings this script knows about are priceless!
+execute_process(
+     COMMAND bash -c "python3.9-config --cflags"
+     OUTPUT_VARIABLE PYTHON3_CFLAGS_CONFIG
+)
+string(STRIP "${PYTHON3_CFLAGS_CONFIG}" PYTHON3_CFLAGS_CONFIG)
+#set(PYTHON3_CFLAGS_CONFIG "")
+execute_process(
+     COMMAND bash -c "python3.9-config --ldflags --libs"
+     OUTPUT_VARIABLE PYTHON3_LDFLAGS_CONFIG
+)
+string(STRIP "${PYTHON3_LDFLAGS_CONFIG}" PYTHON3_LDFLAGS_CONFIG)
+#set(PYTHON3_LDFLAGS_CONFIG "")
 
 ## Install targets (both for binary sub-utilities and the
 ## Python library to be used with SageMath):
@@ -134,42 +155,23 @@ else()
      set(RHEL_INCLUDE_APPENDS "")
      set(RHEL_LINKER_APPENDS "")
 endif()
-if(DEFINED ${MAC_ISYSROOT_PATH})
-     set(MAC_ISYSROOT_PATH "-isystem ${MAC_ISYSROOT_PATH}")
-else()
-     set(MAC_ISYSROOT_PATH "")
-endif()
-if(APPLE)
-    set(CMAKE_CXX_FLAGS
-         " ${PC_GMP_INCLUDE_DIRS} ${PC_GMPXX_INCLUDE_DIRS} \
-         ${MAC_ISYSROOT_PATH} -Wall -mlinker-version=450 \
-        -std=c++17 -fPIC -fopenmp -g -O2 -fno-lto \
-        -DGTFOLD_PACKAGE_VERSION=\"${GTFOLD_PACKAGE_VERSION}\""
-        #-isystem /usr/local/opt/llvm/include \
-        #-stdlib=libc++ -nostdinc++ \
-        #-I/usr/local/opt/llvm/include/c++/v1 /usr/local/opt/llvm/lib/libc++.dylib -lc++  \
-        #-I/usr/local/opt/llvm/include -I/usr/local/include -Igtfold-mfe/include/ \
-    )
-    # NOTE: Providing the explicit LLVM linker path seems to fix the problems on Mojave.
-    set(CMAKE_EXE_LINKER_FLAGS
-        " ${PC_GMP_LIBRARIES} ${PC_GMPXX_LIBRARIES} ${CMAKE_CXX_FLAGS} \
-         -mlinker-version=450 -L/usr/local/lib -lm -lpthread"
-    )
-elseif(UNIX AND NOT APPLE) # Primary target: Linux (typically RHEL)
-    set(CMAKE_CXX_FLAGS
-        "-fPIC -fopenmp -Wall -g -O2 -fvisibility=hidden -fvisibility-inlines-hidden \
-        -Igtfold-mfe/include ${RHEL_INCLUDE_APPENDS} ${CMAKE_CXX_FLAGS}"
-    )
-    set(CMAKE_EXE_LINKER_FLAGS
-        "${RHEL_LINKER_APPENDS} -L/usr/lib -L/usr/local/lib -lpthread \
-        ${CMAKE_EXE_LINKER_FLAGS} ${PC_GMPXX_LIBRARIES} ${PC_GMP_LIBRARIES}"
-    )
-endif()
+unset(CMAKE_CXX_FLAGS)
+set(CMAKE_CXX_FLAGS
+     " -g ${PYTHON3_CFLAGS_CONFIG} ${RHEL_INCLUDE_APPENDS} -DNDEBUG \
+           -rdynamic -fvisibility=default \
+           ${PC_GMP_INCLUDE_DIRS} ${PC_GMPXX_INCLUDE_DIRS} -Igtfold-mfe/include \
+           -D_GNU_SOURCE -DGNU_SOURCE -D__USE_GNU \
+           -DGTFOLD_PACKAGE_VERSION=\"${GTFOLD_PACKAGE_VERSION}\" "
+)
+unset(CMAKE_EXE_LINKER_FLAGS)
+set(CMAKE_EXE_LINKER_FLAGS
+    "${CMAKE_CXX_FLAGS} ${PYTHON3_LDFLAGS_CONFIG} ${RHEL_LINKER_APPENDS} -lpthread"
+)
 
+set(CMAKE_C_FLAGS "")
+set(CMAKE_C_FLAGS_RELEASE "")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS}")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS}")
-set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS}")
-set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS}")
 
 install(
      TARGETS gtfold gtmfe gtsubopt gtboltzmann gtfold-test
