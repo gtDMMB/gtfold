@@ -20,7 +20,7 @@ set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
 set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 
 ## Define the PMFE project and define the output binaries:
-project(gtDMMB_PMFE)
+project(gtDMMB_GTFold)
 
 unset(CMAKE_CXX_FLAGS)
 
@@ -28,12 +28,12 @@ set(GTFOLD_VERSION_MAJOR "1")
 set(GTFOLD_VERSION_MINOR "0")
 set(GTFOLD_VERSION_PATCH "0")
 set(VERSION "${GTFOLD_VERSION_MAJOR}.${GTFOLD_VERSION_MINOR}.${GTFOLD_VERSION_PATCH}")
-set(GTFOLD_PACKAGE_NAME "gtDMMB-PMFE")
+set(GTFOLD_PACKAGE_NAME "gtDMMB_GTFold")
 set(GTFOLD_PACKAGE_VERSION ${VERSION})
 set(GTFOLD_PACKAGE_STRING "${GTFOLD_PACKAGE_NAME} v${GTFOLD_PACKAGE_VERSION}")
 
 ## Option to enable auto running of unit tests after recompiling:
-option(RUN_UNIT_TESTS "Enable running tests after build" FALSE)
+option(RUN_UNIT_TESTS "Enable running tests after build" TRUE)
 
 ## Configure pkg-config script for some dependency libraries (LIBGMP and LIBGMPXX):
 include(FindPkgConfig)
