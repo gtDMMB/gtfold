@@ -31,6 +31,7 @@
 //#include "AdvancedDouble.cc"
 #include "AdvancedDouble.h"
 #include "shapereader.h"
+#include "ThermoConfig.h"
 
 using namespace std;
 
@@ -576,7 +577,9 @@ int boltzmann_main(int argc, char** argv) {
 	g_LIMIT_DISTANCE = LIMIT_DISTANCE;
 	g_contactDistance = contactDistance;
 
-	readThermodynamicParameters(paramDir.c_str(), PARAM_DIR, 0, 0, 0);
+	PARAM_DIR = true;
+     paramDir = GTFoldConfig::GetGTFoldThermoParamsDirectory(GTFoldConfig::TURNER99);
+     readThermodynamicParameters(paramDir.c_str(), PARAM_DIR, 0, 0, 0);
 
 	// Debug 9/30/13
 	// If length < 1000: do not use scaling

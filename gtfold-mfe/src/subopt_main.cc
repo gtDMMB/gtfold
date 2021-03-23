@@ -17,6 +17,7 @@
 #include "global.h"
 #include "utils.h"
 #include "mfe_main.h"
+#include "ThermoConfig.h"
 
 using namespace std;
 
@@ -28,7 +29,7 @@ static string outputPrefix = "";
 static string outputFile = "";
 static string outputDir = "";
 static string paramDir = "";
-static bool PARAM_DIR = false;
+static bool PARAM_DIR = true;
 static int is_check_for_duplicates_enabled = -1;
 static int max_structure_count = -1;//User can optionally use --maxcount max_structure_count to restrict program to generate only that many structure and quits after that 
 static void help();
@@ -287,6 +288,7 @@ void subopt_main(int argc, char** argv) {
 
   init_fold(seq.c_str());
   g_dangles = 2;  
+  paramDir = GTFoldConfig::GetGTFoldThermoParamsDirectory(GTFoldConfig::TURNER99);
   readThermodynamicParameters(paramDir.c_str(), PARAM_DIR, 0, 1, 0);
   
   printRunConfiguration(seq);
