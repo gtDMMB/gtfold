@@ -51,7 +51,6 @@ $ rm -rf CMakeFiles/
 $ cmake -v . -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="/usr/local/opt/llvm/bin/clang" \
      -DCMAKE_CXX_COMPILER="/usr/local/opt/llvm/bin/clang++" \
      -DCMAKE_C_LINK_EXECUTABLE="/usr/local/opt/llvm/bin/ld.lld" \
-     -DMAC_ISYSROOT_PATH="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr" \
      -DMACOS_OFFICE_BOX=1
 (On MacOS -- MacOS/10.14/Mojave Mini Desktop Box)
 $ cmake -v . -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="/usr/local/opt/llvm/bin/clang" \
