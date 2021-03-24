@@ -173,5 +173,5 @@ install(
 ## Running of unit tests configuration:
 add_custom_command(
     TARGET gtfold-test POST_BUILD
-    COMMAND bash -c "${CMAKE_COMMAND} -DRUN_UNIT_TESTS=${RUN_UNIT_TESTS} -P CMakeRunUnitTests.cmake"
+    COMMAND bash -c "${CMAKE_COMMAND} -DRUN_UNIT_TESTS=${RUN_UNIT_TESTS} -P GTFoldCMakeBuild/CMakeRunUnitTests.cmake"
 )
