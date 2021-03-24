@@ -85,6 +85,7 @@ set_target_properties(
      OUTPUT_NAME "gtfold"
      COMPILE_FLAGS "${CMAKE_CXX_FLAGS}"
 )
+add_dependencies(gtfold BuildConfigHeader)
 
 add_executable(
     gtmfe ${ALL_TARGET_SOURCES} gtfold-mfe/src/mfe_main.cc gtfold-mfe/src/binexe-utils/main.cc
@@ -104,6 +105,7 @@ set_target_properties(
      OUTPUT_NAME "gtsubopt"
      COMPILE_FLAGS "${CMAKE_CXX_FLAGS}"
 )
+add_dependencies(gtsubopt BuildConfigHeader)
 
 add_executable(
     gtboltzmann ${ALL_TARGET_SOURCES} gtfold-mfe/src/boltzmann_main.cc gtfold-mfe/src/binexe-utils/main.cc
@@ -113,6 +115,7 @@ set_target_properties(
      OUTPUT_NAME "gtboltzmann"
      COMPILE_FLAGS "${CMAKE_CXX_FLAGS}"
 )
+add_dependencies(gtboltzmann BuildConfigHeader)
 
 add_executable(
     gtfold-test ${ALL_TARGET_SOURCES} gtfold-mfe/src/binexe-utils/test_ss_constraint.c
@@ -122,6 +125,7 @@ set_target_properties(
      OUTPUT_NAME "gtfold-test"
      COMPILE_FLAGS "${CMAKE_CXX_FLAGS}"
 )
+add_dependencies(gtfold-test BuildConfigHeader)
 
 ## Install targets (both for binary sub-utilities and the
 ## Python library to be used with SageMath):
