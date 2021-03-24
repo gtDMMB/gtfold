@@ -47,15 +47,28 @@ Run the following command at your terminal of choice:
 $ git clone https://github.com/gtDMMB/gtfold.git
 $ cd gtfold
 $ rm -rf CMakeFiles/
-(On MacOS)
+(On MacOS -- MacOS/10.14/Mojave Office Box)
 $ cmake -v . -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="/usr/local/opt/llvm/bin/clang" \
      -DCMAKE_CXX_COMPILER="/usr/local/opt/llvm/bin/clang++" \
      -DCMAKE_C_LINK_EXECUTABLE="/usr/local/opt/llvm/bin/ld.lld" \
-     -DMAC_ISYSROOT_PATH="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr"
+     -DMAC_ISYSROOT_PATH="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr" \
+     -DMACOS_OFFICE_BOX=1
+(On MacOS -- MacOS/10.14/Mojave Mini Desktop Box)
+$ cmake -v . -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="/usr/local/opt/llvm/bin/clang" \
+     -DCMAKE_CXX_COMPILER="/usr/local/opt/llvm/bin/clang++" \
+     -DCMAKE_C_LINK_EXECUTABLE="/usr/local/opt/llvm/bin/ld.lld" \
+     -DMAC_ISYSROOT_PATH="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr" 
 (On Linux/Unix)
-$ cmake -v . -DCMAKE_BUILD_TYPE=Release
+$ cmake -v . -DCMAKE_BUILD_TYPE=Release -DLINUX_GCC=1
 $ make clean && make VERBOSE=1
 ```
+Notice that we have maintained three ``CMakeLists.txt`` files for compilation on two variants of patched 
+MacOS 10.14/Mojave machines (using ``clang/clang++``), and one using the ``gcc/g++`` for Linux and other 
+Unix like system variants. The ``g++`` compiler toolchain is more standard on Linux. 
+Using ``clang++`` installed with the Homebrew ``llvm`` package is easier on current MacOS/10.14/Mojave builds. 
+Because of subtle differences in ``XCode`` and/or ``CommandLineTools`` versions on different Mojave boxes, 
+we have included two separate MacOS configurations that are used with ``cmake``. If one does not work, we 
+recommend trying the other variant before posting a new issue about ``cmake`` related build failures.
 
 ### Developers: Cleaning the CMake generated files
 
