@@ -67,6 +67,16 @@ file(GLOB ALL_TARGET_SOURCES gtfold-mfe/src/*.cc gtfold-mfe/src/*.c gtfold-mfe/i
 set(PROJECT_GTFOLDMFE_SOURCE_DIR "${PROJECT_SOURCE_DIR}/gtfold-mfe")
 include_directories("${PROJECT_GTFOLDMFE_SOURCE_DIR}/include")
 
+add_custom_command(
+    OUTPUT "${PROJECT_GTFOLDMFE_SOURCE_DIR}/include/ThermoConfig.h"
+    COMMAND bash "GTFoldCMakeBuild/GenerateThermoParamsConfigHeader.sh"
+    COMMAND touch "${PROJECT_GTFOLDMFE_SOURCE_DIR}/include/ThermoConfig.h"
+)
+add_custom_target(
+     BuildConfigHeader ALL 
+     DEPENDS "${PROJECT_GTFOLDMFE_SOURCE_DIR}/include/ThermoConfig.h"
+)
+
 add_executable(
     gtfold ${ALL_TARGET_SOURCES} gtfold-mfe/src/binexe-utils/main.cc
 )
@@ -84,6 +94,7 @@ set_target_properties(
      OUTPUT_NAME "gtmfe"
      COMPILE_FLAGS "${CMAKE_CXX_FLAGS}"
 )
+add_dependencies(gtmfe BuildConfigHeader)
 
 add_executable(
     gtsubopt ${ALL_TARGET_SOURCES} gtfold-mfe/src/subopt_main.cc gtfold-mfe/src/binexe-utils/main.cc
