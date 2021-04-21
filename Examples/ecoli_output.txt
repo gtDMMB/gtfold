@@ -1,0 +1,23 @@
+GTfold: A Scalable Multicore Code for RNA Secondary Structure Prediction
+(c) 2007-2011  D.A. Bader, C.E. Heitsch, S.C. Harvey
+Georgia Institute of Technology
+
+Run Configuration:
+- standard
+- thermodynamic parameters: /Users/heitsch/GTDMMBSoftware/gtfold/gtfold-mfe/data/Turner99/
+- input file: ecoli.txt
+- sequence length: 1542
+- output file: ecoli.ct
+
+Computing minimum free energy structure...
+Done.
+
+Results:
+- Minimum Free Energy:    -618.2000 kcal/mol
+- MFE runtime:  2.280086 seconds
+
+
+AAAUUGAAGAGUUUGAUCAUGGCUCAGAUUGAACGCUGGCGGCAGGCCUAACACAUGCAAGUCGAACGGUAACAGGAAGAAGCUUGCUUCUUUGCUGACGAGUGGCGGACGGGUGAGUAAUGUCUGGGAAACUGCCUGAUGGAGGGGGAUAACUACUGGAAACGGUAGCUAAUACCGCAUAACGUCGCAAGACCAAAGAGGGGGACCUUCGGGCCUCUUGCCAUCGGAUGUGCCCAGAUGGGAUUAGCUAGUAGGUGGGGUAACGGCUCACCUAGGCGACGAUCCCUAGCUGGUCUGAGAGGAUGACCAGCCACACUGGAACUGAGACACGGUCCAGACUCCUACGGGAGGCAGCAGUGGGGAAUAUUGCACAAUGGGCGCAAGCCUGAUGCAGCCAUGCCGCGUGUAUGAAGAAGGCCUUCGGGUUGUAAAGUACUUUCAGCGGGGAGGAAGGGAGUAAAGUUAAUACCUUUGCUCAUUGACGUUACCCGCAGAAGAAGCACCGGCUAACUCCGUGCCAGCAGCCGCGGUAAUACGGAGGGUGCAAGCGUUAAUCGGAAUUACUGGGCGUAAAGCGCACGCAGGCGGUUUGUUAAGUCAGAUGUGAAAUCCCCGGGCUCAACCUGGGAACUGCAUCUGAUACUGGCAAGCUUGAGUCUCGUAGAGGGGGGUAGAAUUCCAGGUGUAGCGGUGAAAUGCGUAGAGAUCUGGAGGAAUACCGGUGGCGAAGGCGGCCCCCUGGACGAAGACUGACGCUCAGGUGCGAAAGCGUGGGGAGCAAACAGGAUUAGAUACCCUGGUAGUCCACGCCGUAAACGAUGUCGACUUGGAGGUUGUGCCCUUGAGGCGUGGCUUCCGGAGCUAACGCGUUAAGUCGACCGCCUGGGGAGUACGGCCGCAAGGUUAAAACUCAAAUGAAUUGACGGGGGCCCGCACAAGCGGUGGAGCAUGUGGUUUAAUUCGAUGCAACGCGAAGAACCUUACCUGGUCUUGACAUCCACGGAAGUUUUCAGAGAUGAGAAUGUGCCUUCGGGAACCGUGAGACAGGUGCUGCAUGGCUGUCGUCAGCUCGUGUUGUGAAAUGUUGGGUUAAGUCCCGCAACGAGCGCAACCCUUAUCCUUUGUUGCCAGCGGUCCGGCCGGGAACUCAAAGGAGACUGCCAGUGAUAAACUGGAGGAAGGUGGGGAUGACGUCAAGUCAUCAUGGCCCUUACGACCAGGGCUACACACGUGCUACAAUGGCGCAUACAAAGAGAAGCGACCUCGCGAGAGCAAGCGGACCUCAUAAAGUGCGUCGUAGUCCGGAUUGGAGUCUGCAACUCGACUCCAUGAAGUCGGAAUCGCUAGUAAUCGUGGAUCAGAAUGCCACGGUGAAUACGUUCCCGGGCCUUGUACACACCGCCCGUCACACCAUGGGAGUGGGUUGCAAAAGAAGUAGGUAGCUUAACCUUCGGGAGGGCGCUUACCACUUUGUGAUUCAUGACUGGGGUGAAGUCGUAACAAGGUAACCGUAGGGGAACCUGCGGUUGGAUCACCUCCUUA
+........((((((...(.(((((..(((....((((((((((((..........(((.(.(((..((((.....(((((((....))))))))))).))).).)))...(((((((....(((((((..((...(((((((((((((....((((((....))))))......(((......(((....)))....((((....))))))).)))))).)))))))..)).)))))))((((((.(((..((((((((.......)))))))))))...))))))..(((.((.((.(.((((((((..((((.(((((.(((.....)))))))).((((....))))......))))..((((((.((((((.(((....))).(((((((((((((.((..........((((.(((((.((((((..(((((..(.(((((..(..((.((((((((.......)))))))).))..)....))))).......(((((......(((((((((.((....)))))...)))))))))))..(((...((((......((((((((...((....))....(((((((((.((((((((((...((((.((......)).))))..))))))))))..)))))))))..((((((((..(((((((((...((((((((.(.(((........)))..).))))))))...)))).((.((....)).)))))))..))).))))).)))))))).((((...(((((((..((...((((.........))))))..)))))))))))..))))((((((((((((((..((((.....))))..))))))...((....))...)))))))))))...)..))))).(((....)))...........(((((((((((....)))((((.((......)).))))..)))))))).)))))).)))))..))))(((((.(((.......(((((..(((((((....)))))))...((....))..))))))))))))))).))))))))).)))).......)))))).)))))).))))..))))).)))).)))......))))))).))))))))))))))).)))))))))))).((((((.((.(((((.....))))))).(((((((.((((((.....))))))...(((((..(((..((((((((...((..((((...(((((((.....(((..((...(((....)))...))....))).....)))))))))))..))..........(((((((((..((((((.....((((.((.((...(((((((.........)))))))...))))))))(((((..((....))..)))))......))))))..)))))))))..........)))))....))))))..))))).....)))))))(((((((..((((.......))))..........(((((((((....)))))))))))))))))))))).
+
+MFE structure saved in .ct format to ecoli.ct
